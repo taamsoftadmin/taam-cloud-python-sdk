@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["FileUploadResponse"]
+__all__ = ["UploadResponse"]
 
 
-class FileUploadResponse(BaseModel):
+class UploadResponse(BaseModel):
     content: Optional[str] = None
 
     error: Optional[str] = None

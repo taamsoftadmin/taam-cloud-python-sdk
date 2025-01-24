@@ -10,31 +10,48 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
+from .types import client_upload_params
 from ._types import (
     NOT_GIVEN,
+    Body,
     Omit,
+    Query,
+    Headers,
     Timeout,
     NotGiven,
+    FileTypes,
     Transport,
     ProxiesTypes,
     RequestOptions,
 )
 from ._utils import (
     is_given,
+    extract_files,
+    maybe_transform,
+    deepcopy_minimal,
     get_async_library,
+    async_maybe_transform,
 )
 from ._version import __version__
-from .resources import maps, crawl, files, models, rerank, scrape, searches, embeddings
+from ._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from .resources import maps, crawl, models, rerank, scrape, searches, embeddings
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, TaamCloudError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
+    make_request_options,
 )
 from .resources.chat import chat
 from .resources.suno import suno
 from .resources.images import images
+from .types.upload_response import UploadResponse
 
 __all__ = [
     "ENVIRONMENTS",
@@ -63,7 +80,6 @@ class TaamCloud(SyncAPIClient):
     suno: suno.SunoResource
     models: models.ModelsResource
     images: images.ImagesResource
-    files: files.FilesResource
     crawl: crawl.CrawlResource
     scrape: scrape.ScrapeResource
     maps: maps.MapsResource
@@ -155,7 +171,6 @@ class TaamCloud(SyncAPIClient):
         self.suno = suno.SunoResource(self)
         self.models = models.ModelsResource(self)
         self.images = images.ImagesResource(self)
-        self.files = files.FilesResource(self)
         self.crawl = crawl.CrawlResource(self)
         self.scrape = scrape.ScrapeResource(self)
         self.maps = maps.MapsResource(self)
@@ -236,6 +251,63 @@ class TaamCloud(SyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    def upload(
+        self,
+        *,
+        file: FileTypes,
+        enable_ocr: bool | NotGiven = NOT_GIVEN,
+        enable_vision: bool | NotGiven = NOT_GIVEN,
+        save_all: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> UploadResponse:
+        """
+        Upload and process files with optional OCR and Vision capabilities
+
+        Args:
+          file: File to upload
+
+          enable_ocr: Enable OCR processing
+
+          enable_vision: Enable Vision processing
+
+          save_all: Save raw files
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        body = deepcopy_minimal(
+            {
+                "file": file,
+                "enable_ocr": enable_ocr,
+                "enable_vision": enable_vision,
+                "save_all": save_all,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return self.post(
+            "/upload",
+            body=maybe_transform(body, client_upload_params.ClientUploadParams),
+            files=files,
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UploadResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -277,7 +349,6 @@ class AsyncTaamCloud(AsyncAPIClient):
     suno: suno.AsyncSunoResource
     models: models.AsyncModelsResource
     images: images.AsyncImagesResource
-    files: files.AsyncFilesResource
     crawl: crawl.AsyncCrawlResource
     scrape: scrape.AsyncScrapeResource
     maps: maps.AsyncMapsResource
@@ -369,7 +440,6 @@ class AsyncTaamCloud(AsyncAPIClient):
         self.suno = suno.AsyncSunoResource(self)
         self.models = models.AsyncModelsResource(self)
         self.images = images.AsyncImagesResource(self)
-        self.files = files.AsyncFilesResource(self)
         self.crawl = crawl.AsyncCrawlResource(self)
         self.scrape = scrape.AsyncScrapeResource(self)
         self.maps = maps.AsyncMapsResource(self)
@@ -450,6 +520,63 @@ class AsyncTaamCloud(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    async def upload(
+        self,
+        *,
+        file: FileTypes,
+        enable_ocr: bool | NotGiven = NOT_GIVEN,
+        enable_vision: bool | NotGiven = NOT_GIVEN,
+        save_all: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> UploadResponse:
+        """
+        Upload and process files with optional OCR and Vision capabilities
+
+        Args:
+          file: File to upload
+
+          enable_ocr: Enable OCR processing
+
+          enable_vision: Enable Vision processing
+
+          save_all: Save raw files
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        body = deepcopy_minimal(
+            {
+                "file": file,
+                "enable_ocr": enable_ocr,
+                "enable_vision": enable_vision,
+                "save_all": save_all,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return await self.post(
+            "/upload",
+            body=await async_maybe_transform(body, client_upload_params.ClientUploadParams),
+            files=files,
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UploadResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -492,11 +619,14 @@ class TaamCloudWithRawResponse:
         self.suno = suno.SunoResourceWithRawResponse(client.suno)
         self.models = models.ModelsResourceWithRawResponse(client.models)
         self.images = images.ImagesResourceWithRawResponse(client.images)
-        self.files = files.FilesResourceWithRawResponse(client.files)
         self.crawl = crawl.CrawlResourceWithRawResponse(client.crawl)
         self.scrape = scrape.ScrapeResourceWithRawResponse(client.scrape)
         self.maps = maps.MapsResourceWithRawResponse(client.maps)
         self.searches = searches.SearchesResourceWithRawResponse(client.searches)
+
+        self.upload = to_raw_response_wrapper(
+            client.upload,
+        )
 
 
 class AsyncTaamCloudWithRawResponse:
@@ -507,11 +637,14 @@ class AsyncTaamCloudWithRawResponse:
         self.suno = suno.AsyncSunoResourceWithRawResponse(client.suno)
         self.models = models.AsyncModelsResourceWithRawResponse(client.models)
         self.images = images.AsyncImagesResourceWithRawResponse(client.images)
-        self.files = files.AsyncFilesResourceWithRawResponse(client.files)
         self.crawl = crawl.AsyncCrawlResourceWithRawResponse(client.crawl)
         self.scrape = scrape.AsyncScrapeResourceWithRawResponse(client.scrape)
         self.maps = maps.AsyncMapsResourceWithRawResponse(client.maps)
         self.searches = searches.AsyncSearchesResourceWithRawResponse(client.searches)
+
+        self.upload = async_to_raw_response_wrapper(
+            client.upload,
+        )
 
 
 class TaamCloudWithStreamedResponse:
@@ -522,11 +655,14 @@ class TaamCloudWithStreamedResponse:
         self.suno = suno.SunoResourceWithStreamingResponse(client.suno)
         self.models = models.ModelsResourceWithStreamingResponse(client.models)
         self.images = images.ImagesResourceWithStreamingResponse(client.images)
-        self.files = files.FilesResourceWithStreamingResponse(client.files)
         self.crawl = crawl.CrawlResourceWithStreamingResponse(client.crawl)
         self.scrape = scrape.ScrapeResourceWithStreamingResponse(client.scrape)
         self.maps = maps.MapsResourceWithStreamingResponse(client.maps)
         self.searches = searches.SearchesResourceWithStreamingResponse(client.searches)
+
+        self.upload = to_streamed_response_wrapper(
+            client.upload,
+        )
 
 
 class AsyncTaamCloudWithStreamedResponse:
@@ -537,11 +673,14 @@ class AsyncTaamCloudWithStreamedResponse:
         self.suno = suno.AsyncSunoResourceWithStreamingResponse(client.suno)
         self.models = models.AsyncModelsResourceWithStreamingResponse(client.models)
         self.images = images.AsyncImagesResourceWithStreamingResponse(client.images)
-        self.files = files.AsyncFilesResourceWithStreamingResponse(client.files)
         self.crawl = crawl.AsyncCrawlResourceWithStreamingResponse(client.crawl)
         self.scrape = scrape.AsyncScrapeResourceWithStreamingResponse(client.scrape)
         self.maps = maps.AsyncMapsResourceWithStreamingResponse(client.maps)
         self.searches = searches.AsyncSearchesResourceWithStreamingResponse(client.searches)
+
+        self.upload = async_to_streamed_response_wrapper(
+            client.upload,
+        )
 
 
 Client = TaamCloud

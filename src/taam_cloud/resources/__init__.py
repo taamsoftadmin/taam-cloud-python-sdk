@@ -32,14 +32,6 @@ from .crawl import (
     CrawlResourceWithStreamingResponse,
     AsyncCrawlResourceWithStreamingResponse,
 )
-from .files import (
-    FilesResource,
-    AsyncFilesResource,
-    FilesResourceWithRawResponse,
-    AsyncFilesResourceWithRawResponse,
-    FilesResourceWithStreamingResponse,
-    AsyncFilesResourceWithStreamingResponse,
-)
 from .images import (
     ImagesResource,
     AsyncImagesResource,
@@ -126,12 +118,6 @@ __all__ = [
     "AsyncImagesResourceWithRawResponse",
     "ImagesResourceWithStreamingResponse",
     "AsyncImagesResourceWithStreamingResponse",
-    "FilesResource",
-    "AsyncFilesResource",
-    "FilesResourceWithRawResponse",
-    "AsyncFilesResourceWithRawResponse",
-    "FilesResourceWithStreamingResponse",
-    "AsyncFilesResourceWithStreamingResponse",
     "CrawlResource",
     "AsyncCrawlResource",
     "CrawlResourceWithRawResponse",

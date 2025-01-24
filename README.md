@@ -36,7 +36,7 @@ client = TaamCloud(
     environment="environment_1",
 )
 
-embedding = client.embeddings.create(
+embeddings_response = client.embeddings.create(
     input=["string"],
     model="jina-embeddings-v3",
 )
@@ -64,7 +64,7 @@ client = AsyncTaamCloud(
 
 
 async def main() -> None:
-    embedding = await client.embeddings.create(
+    embeddings_response = await client.embeddings.create(
         input=["string"],
         model="jina-embeddings-v3",
     )
