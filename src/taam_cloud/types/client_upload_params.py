@@ -6,10 +6,10 @@ from typing_extensions import Required, TypedDict
 
 from .._types import FileTypes
 
-__all__ = ["FileUploadParams"]
+__all__ = ["ClientUploadParams"]
 
 
-class FileUploadParams(TypedDict, total=False):
+class ClientUploadParams(TypedDict, total=False):
     file: Required[FileTypes]
     """File to upload"""
 

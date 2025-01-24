@@ -1,14 +1,26 @@
+# TaamCloud
+
+Types:
+
+```python
+from taam_cloud.types import UploadResponse
+```
+
+Methods:
+
+- <code title="post /upload">client.<a href="./src/taam_cloud/_client.py">upload</a>(\*\*<a href="src/taam_cloud/types/client_upload_params.py">params</a>) -> <a href="./src/taam_cloud/types/upload_response.py">UploadResponse</a></code>
+
 # Embeddings
 
 Types:
 
 ```python
-from taam_cloud.types import EmbeddingCreateResponse
+from taam_cloud.types import EmbeddingsResponse
 ```
 
 Methods:
 
-- <code title="post /v1/embeddings">client.embeddings.<a href="./src/taam_cloud/resources/embeddings.py">create</a>(\*\*<a href="src/taam_cloud/types/embedding_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/embedding_create_response.py">object</a></code>
+- <code title="post /v1/embeddings">client.embeddings.<a href="./src/taam_cloud/resources/embeddings.py">create</a>(\*\*<a href="src/taam_cloud/types/embedding_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/embeddings_response.py">object</a></code>
 
 # Rerank
 
@@ -57,18 +69,6 @@ from taam_cloud.types.images import ImageGenerationResponse
 Methods:
 
 - <code title="post /v1/images/generations">client.images.generations.<a href="./src/taam_cloud/resources/images/generations.py">create</a>(\*\*<a href="src/taam_cloud/types/images/generation_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/images/image_generation_response.py">ImageGenerationResponse</a></code>
-
-# Files
-
-Types:
-
-```python
-from taam_cloud.types import FileUploadResponse
-```
-
-Methods:
-
-- <code title="post /upload">client.files.<a href="./src/taam_cloud/resources/files.py">upload</a>(\*\*<a href="src/taam_cloud/types/file_upload_params.py">params</a>) -> <a href="./src/taam_cloud/types/file_upload_response.py">FileUploadResponse</a></code>
 
 # Crawl
 
