@@ -30,7 +30,7 @@ class TestMaps:
             url="url",
             ignore_sitemap=True,
             include_subdomains=True,
-            limit=0,
+            limit=5000,
             search="search",
             sitemap_only=True,
         )
@@ -77,7 +77,7 @@ class TestAsyncMaps:
             url="url",
             ignore_sitemap=True,
             include_subdomains=True,
-            limit=0,
+            limit=5000,
             search="search",
             sitemap_only=True,
         )
