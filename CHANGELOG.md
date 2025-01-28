@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 (2025-01-28)
+
+Full Changelog: [v0.1.0-alpha.1...v1.0.0](https://github.com/taamsoftadmin/taam-cloud-python-sdk/compare/v0.1.0-alpha.1...v1.0.0)
+
+### Chores
+
+* **internal:** codegen related update ([#8](https://github.com/taamsoftadmin/taam-cloud-python-sdk/issues/8)) ([6204580](https://github.com/taamsoftadmin/taam-cloud-python-sdk/commit/6204580c734522a81467d4bce4dcc805bff36966))
+
 ## 0.1.0-alpha.1 (2025-01-24)
 
 Full Changelog: [v0.0.1-alpha.1...v0.1.0-alpha.1](https://github.com/taamsoftadmin/taam-cloud-python-sdk/compare/v0.0.1-alpha.1...v0.1.0-alpha.1)
