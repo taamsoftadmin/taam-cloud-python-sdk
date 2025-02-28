@@ -116,7 +116,7 @@ class TaamCloud(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous taam-cloud client instance.
+        """Construct a new synchronous TaamCloud client instance.
 
         This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
         """
@@ -385,7 +385,7 @@ class AsyncTaamCloud(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async taam-cloud client instance.
+        """Construct a new async AsyncTaamCloud client instance.
 
         This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
         """
