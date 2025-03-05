@@ -23,6 +23,7 @@ from pydantic import ValidationError
 
 from taam_cloud import TaamCloud, AsyncTaamCloud, APIResponseValidationError
 from taam_cloud._types import Omit
+from taam_cloud._utils import maybe_transform
 from taam_cloud._models import BaseModel, FinalRequestOptions
 from taam_cloud._constants import RAW_RESPONSE_HEADER
 from taam_cloud._exceptions import APIStatusError, TaamCloudError, APITimeoutError, APIResponseValidationError
@@ -32,6 +33,7 @@ from taam_cloud._base_client import (
     BaseClient,
     make_request_options,
 )
+from taam_cloud.types.embedding_create_params import EmbeddingCreateParams
 
 from .utils import update_env
 
@@ -755,7 +757,9 @@ class TestTaamCloud:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/v1/embeddings",
-                body=cast(object, dict(input=["string"], model="jina-embeddings-v3")),
+                body=cast(
+                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -770,7 +774,9 @@ class TestTaamCloud:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/v1/embeddings",
-                body=cast(object, dict(input=["string"], model="jina-embeddings-v3")),
+                body=cast(
+                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1563,7 +1569,9 @@ class TestAsyncTaamCloud:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/v1/embeddings",
-                body=cast(object, dict(input=["string"], model="jina-embeddings-v3")),
+                body=cast(
+                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1578,7 +1586,9 @@ class TestAsyncTaamCloud:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/v1/embeddings",
-                body=cast(object, dict(input=["string"], model="jina-embeddings-v3")),
+                body=cast(
+                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
