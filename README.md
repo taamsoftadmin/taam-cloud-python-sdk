@@ -10,13 +10,13 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.taam-cloud.com](https://docs.taam-cloud.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.taam.cloud](https://docs.taam.cloud). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
 # install from PyPI
-pip install --pre taam_cloud
+pip install taam_cloud
 ```
 
 ## Usage
@@ -28,20 +28,20 @@ import os
 from taam_cloud import TaamCloud
 
 client = TaamCloud(
-    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
-    # or 'production' | 'environment_2' | 'environment_3'; defaults to "production".
-    environment="environment_1",
+    bearer_token=os.environ.get(
+        "TAAM_CLOUD_BEARER_TOKEN"
+    ),  # This is the default and can be omitted
 )
 
-embeddings_response = client.embeddings.create(
-    input=["string"],
+embedding = client.embeddings.create(
+    input=["Generate vector representations of this text"],
     model="jina-embeddings-v3",
 )
 ```
 
 While you can provide a `bearer_token` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BEARER_TOKEN="My Bearer Token"` to your `.env` file
+to add `TAAM_CLOUD_BEARER_TOKEN="My Bearer Token"` to your `.env` file
 so that your Bearer Token is not stored in source control.
 
 ## Async usage
@@ -54,15 +54,15 @@ import asyncio
 from taam_cloud import AsyncTaamCloud
 
 client = AsyncTaamCloud(
-    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
-    # or 'production' | 'environment_2' | 'environment_3'; defaults to "production".
-    environment="environment_1",
+    bearer_token=os.environ.get(
+        "TAAM_CLOUD_BEARER_TOKEN"
+    ),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    embeddings_response = await client.embeddings.create(
-        input=["string"],
+    embedding = await client.embeddings.create(
+        input=["Generate vector representations of this text"],
         model="jina-embeddings-v3",
     )
 
@@ -83,7 +83,7 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## File uploads
 
-Request parameters that correspond to file uploads can be passed as `bytes`, a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
 
 ```python
 from pathlib import Path
@@ -91,7 +91,7 @@ from taam_cloud import TaamCloud
 
 client = TaamCloud()
 
-client.upload(
+client.files.upload(
     file=Path("/path/to/file"),
 )
 ```
@@ -115,7 +115,7 @@ client = TaamCloud()
 
 try:
     client.embeddings.create(
-        input=["string"],
+        input=["Generate vector representations of this text"],
         model="jina-embeddings-v3",
     )
 except taam_cloud.APIConnectionError as e:
@@ -161,7 +161,7 @@ client = TaamCloud(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).embeddings.create(
-    input=["string"],
+    input=["Generate vector representations of this text"],
     model="jina-embeddings-v3",
 )
 ```
@@ -187,7 +187,7 @@ client = TaamCloud(
 
 # Override per-request:
 client.with_options(timeout=5.0).embeddings.create(
-    input=["string"],
+    input=["Generate vector representations of this text"],
     model="jina-embeddings-v3",
 )
 ```
@@ -231,7 +231,7 @@ from taam_cloud import TaamCloud
 
 client = TaamCloud()
 response = client.embeddings.with_raw_response.create(
-    input=["string"],
+    input=["Generate vector representations of this text"],
     model="jina-embeddings-v3",
 )
 print(response.headers.get('X-My-Header'))
@@ -252,7 +252,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.embeddings.with_streaming_response.create(
-    input=["string"],
+    input=["Generate vector representations of this text"],
     model="jina-embeddings-v3",
 ) as response:
     print(response.headers.get("X-My-Header"))

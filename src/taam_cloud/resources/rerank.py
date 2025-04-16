@@ -60,7 +60,7 @@ class RerankResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Rerank documents
+        Reorder a list of documents based on their relevance to a query
 
         Args:
           extra_headers: Send extra headers
@@ -125,7 +125,7 @@ class AsyncRerankResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Rerank documents
+        Reorder a list of documents based on their relevance to a query
 
         Args:
           extra_headers: Send extra headers

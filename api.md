@@ -1,26 +1,14 @@
-# TaamCloud
-
-Types:
-
-```python
-from taam_cloud.types import UploadResponse
-```
-
-Methods:
-
-- <code title="post /upload">client.<a href="./src/taam_cloud/_client.py">upload</a>(\*\*<a href="src/taam_cloud/types/client_upload_params.py">params</a>) -> <a href="./src/taam_cloud/types/upload_response.py">UploadResponse</a></code>
-
 # Embeddings
 
 Types:
 
 ```python
-from taam_cloud.types import EmbeddingsResponse
+from taam_cloud.types import EmbeddingCreateResponse
 ```
 
 Methods:
 
-- <code title="post /v1/embeddings">client.embeddings.<a href="./src/taam_cloud/resources/embeddings.py">create</a>(\*\*<a href="src/taam_cloud/types/embedding_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/embeddings_response.py">object</a></code>
+- <code title="post /v1/embeddings">client.embeddings.<a href="./src/taam_cloud/resources/embeddings.py">create</a>(\*\*<a href="src/taam_cloud/types/embedding_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/embedding_create_response.py">object</a></code>
 
 # Rerank
 
@@ -30,19 +18,17 @@ Methods:
 
 # Chat
 
-## Completions
-
 Methods:
 
-- <code title="post /v1/chat/completions">client.chat.completions.<a href="./src/taam_cloud/resources/chat/completions.py">create</a>(\*\*<a href="src/taam_cloud/types/chat/completion_create_params.py">params</a>) -> None</code>
+- <code title="post /v1/chat/completions">client.chat.<a href="./src/taam_cloud/resources/chat.py">create_completion</a>(\*\*<a href="src/taam_cloud/types/chat_create_completion_params.py">params</a>) -> None</code>
 
 # Suno
 
-## Music
+## Submit
 
 Methods:
 
-- <code title="post /suno/submit/music">client.suno.music.<a href="./src/taam_cloud/resources/suno/music.py">submit</a>(\*\*<a href="src/taam_cloud/types/suno/music_submit_params.py">params</a>) -> None</code>
+- <code title="post /suno/submit/music">client.suno.submit.<a href="./src/taam_cloud/resources/suno/submit.py">generate_music</a>(\*\*<a href="src/taam_cloud/types/suno/submit_generate_music_params.py">params</a>) -> None</code>
 
 # Models
 
@@ -58,63 +44,73 @@ Methods:
 
 # Images
 
-## Generations
-
 Types:
 
 ```python
-from taam_cloud.types.images import ImageGenerationResponse
+from taam_cloud.types import ImageGenerateResponse
 ```
 
 Methods:
 
-- <code title="post /v1/images/generations">client.images.generations.<a href="./src/taam_cloud/resources/images/generations.py">create</a>(\*\*<a href="src/taam_cloud/types/images/generation_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/images/image_generation_response.py">ImageGenerationResponse</a></code>
+- <code title="post /v1/images/generations">client.images.<a href="./src/taam_cloud/resources/images.py">generate</a>(\*\*<a href="src/taam_cloud/types/image_generate_params.py">params</a>) -> <a href="./src/taam_cloud/types/image_generate_response.py">ImageGenerateResponse</a></code>
 
-# Crawl
-
-Types:
-
-```python
-from taam_cloud.types import CrawlResponse, CrawlStatusResponse
-```
-
-Methods:
-
-- <code title="post /v1/crawl">client.crawl.<a href="./src/taam_cloud/resources/crawl.py">create</a>(\*\*<a href="src/taam_cloud/types/crawl_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/crawl_response.py">CrawlResponse</a></code>
-- <code title="get /v1/crawl/{id}">client.crawl.<a href="./src/taam_cloud/resources/crawl.py">retrieve</a>(id) -> <a href="./src/taam_cloud/types/crawl_status_response.py">CrawlStatusResponse</a></code>
-
-# Scrape
+# Web
 
 Types:
 
 ```python
-from taam_cloud.types import ScrapeResponse
+from taam_cloud.types import WebCreateResponse
 ```
 
 Methods:
 
-- <code title="post /v1/scrape">client.scrape.<a href="./src/taam_cloud/resources/scrape.py">create</a>(\*\*<a href="src/taam_cloud/types/scrape_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/scrape_response.py">ScrapeResponse</a></code>
+- <code title="post /v1/web">client.web.<a href="./src/taam_cloud/resources/web.py">create</a>(\*\*<a href="src/taam_cloud/types/web_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/web_create_response.py">WebCreateResponse</a></code>
 
-# Maps
+# Files
 
 Types:
 
 ```python
-from taam_cloud.types import MapResponse
+from taam_cloud.types import FileRetrieveResponse, FileUploadResponse
 ```
 
 Methods:
 
-- <code title="post /v1/map">client.maps.<a href="./src/taam_cloud/resources/maps.py">discover</a>(\*\*<a href="src/taam_cloud/types/map_discover_params.py">params</a>) -> <a href="./src/taam_cloud/types/map_response.py">MapResponse</a></code>
+- <code title="get /v1/files/retrieve">client.files.<a href="./src/taam_cloud/resources/files.py">retrieve</a>(\*\*<a href="src/taam_cloud/types/file_retrieve_params.py">params</a>) -> <a href="./src/taam_cloud/types/file_retrieve_response.py">FileRetrieveResponse</a></code>
+- <code title="post /v1/files">client.files.<a href="./src/taam_cloud/resources/files.py">upload</a>(\*\*<a href="src/taam_cloud/types/file_upload_params.py">params</a>) -> <a href="./src/taam_cloud/types/file_upload_response.py">FileUploadResponse</a></code>
 
-# Searches
+# Upload
 
 Types:
 
 ```python
-from taam_cloud.types import SearchResponse
+from taam_cloud.types import UploadCreateResponse
 ```
 
 Methods:
 
-- <code title="post /api/search">client.searches.<a href="./src/taam_cloud/resources/searches.py">perform</a>(\*\*<a href="src/taam_cloud/types/search_perform_params.py">params</a>) -> <a href="./src/taam_cloud/types/search_response.py">SearchResponse</a></code>
+- <code title="post /upload">client.upload.<a href="./src/taam_cloud/resources/upload.py">create</a>(\*\*<a href="src/taam_cloud/types/upload_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/upload_create_response.py">UploadCreateResponse</a></code>
+
+# VideoGeneration
+
+Types:
+
+```python
+from taam_cloud.types import VideoGenerationCreateResponse
+```
+
+Methods:
+
+- <code title="post /v1/video_generation">client.video_generation.<a href="./src/taam_cloud/resources/video_generation.py">create</a>(\*\*<a href="src/taam_cloud/types/video_generation_create_params.py">params</a>) -> <a href="./src/taam_cloud/types/video_generation_create_response.py">VideoGenerationCreateResponse</a></code>
+
+# Query
+
+Types:
+
+```python
+from taam_cloud.types import QueryCheckVideoGenerationStatusResponse
+```
+
+Methods:
+
+- <code title="get /v1/query/video_generation">client.query.<a href="./src/taam_cloud/resources/query.py">check_video_generation_status</a>(\*\*<a href="src/taam_cloud/types/query_check_video_generation_status_params.py">params</a>) -> <a href="./src/taam_cloud/types/query_check_video_generation_status_response.py">QueryCheckVideoGenerationStatusResponse</a></code>

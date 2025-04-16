@@ -58,7 +58,8 @@ class EmbeddingsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        Generate embeddings
+        Create vector embeddings from text input for semantic search and similarity
+        operations
 
         Args:
           extra_headers: Send extra headers
@@ -118,7 +119,8 @@ class AsyncEmbeddingsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        Generate embeddings
+        Create vector embeddings from text input for semantic search and similarity
+        operations
 
         Args:
           extra_headers: Send extra headers

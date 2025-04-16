@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .web import (
+    WebResource,
+    AsyncWebResource,
+    WebResourceWithRawResponse,
+    AsyncWebResourceWithRawResponse,
+    WebResourceWithStreamingResponse,
+    AsyncWebResourceWithStreamingResponse,
+)
 from .chat import (
     ChatResource,
     AsyncChatResource,
@@ -7,14 +15,6 @@ from .chat import (
     AsyncChatResourceWithRawResponse,
     ChatResourceWithStreamingResponse,
     AsyncChatResourceWithStreamingResponse,
-)
-from .maps import (
-    MapsResource,
-    AsyncMapsResource,
-    MapsResourceWithRawResponse,
-    AsyncMapsResourceWithRawResponse,
-    MapsResourceWithStreamingResponse,
-    AsyncMapsResourceWithStreamingResponse,
 )
 from .suno import (
     SunoResource,
@@ -24,13 +24,21 @@ from .suno import (
     SunoResourceWithStreamingResponse,
     AsyncSunoResourceWithStreamingResponse,
 )
-from .crawl import (
-    CrawlResource,
-    AsyncCrawlResource,
-    CrawlResourceWithRawResponse,
-    AsyncCrawlResourceWithRawResponse,
-    CrawlResourceWithStreamingResponse,
-    AsyncCrawlResourceWithStreamingResponse,
+from .files import (
+    FilesResource,
+    AsyncFilesResource,
+    FilesResourceWithRawResponse,
+    AsyncFilesResourceWithRawResponse,
+    FilesResourceWithStreamingResponse,
+    AsyncFilesResourceWithStreamingResponse,
+)
+from .query import (
+    QueryResource,
+    AsyncQueryResource,
+    QueryResourceWithRawResponse,
+    AsyncQueryResourceWithRawResponse,
+    QueryResourceWithStreamingResponse,
+    AsyncQueryResourceWithStreamingResponse,
 )
 from .images import (
     ImagesResource,
@@ -56,21 +64,13 @@ from .rerank import (
     RerankResourceWithStreamingResponse,
     AsyncRerankResourceWithStreamingResponse,
 )
-from .scrape import (
-    ScrapeResource,
-    AsyncScrapeResource,
-    ScrapeResourceWithRawResponse,
-    AsyncScrapeResourceWithRawResponse,
-    ScrapeResourceWithStreamingResponse,
-    AsyncScrapeResourceWithStreamingResponse,
-)
-from .searches import (
-    SearchesResource,
-    AsyncSearchesResource,
-    SearchesResourceWithRawResponse,
-    AsyncSearchesResourceWithRawResponse,
-    SearchesResourceWithStreamingResponse,
-    AsyncSearchesResourceWithStreamingResponse,
+from .upload import (
+    UploadResource,
+    AsyncUploadResource,
+    UploadResourceWithRawResponse,
+    AsyncUploadResourceWithRawResponse,
+    UploadResourceWithStreamingResponse,
+    AsyncUploadResourceWithStreamingResponse,
 )
 from .embeddings import (
     EmbeddingsResource,
@@ -79,6 +79,14 @@ from .embeddings import (
     AsyncEmbeddingsResourceWithRawResponse,
     EmbeddingsResourceWithStreamingResponse,
     AsyncEmbeddingsResourceWithStreamingResponse,
+)
+from .video_generation import (
+    VideoGenerationResource,
+    AsyncVideoGenerationResource,
+    VideoGenerationResourceWithRawResponse,
+    AsyncVideoGenerationResourceWithRawResponse,
+    VideoGenerationResourceWithStreamingResponse,
+    AsyncVideoGenerationResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -118,28 +126,34 @@ __all__ = [
     "AsyncImagesResourceWithRawResponse",
     "ImagesResourceWithStreamingResponse",
     "AsyncImagesResourceWithStreamingResponse",
-    "CrawlResource",
-    "AsyncCrawlResource",
-    "CrawlResourceWithRawResponse",
-    "AsyncCrawlResourceWithRawResponse",
-    "CrawlResourceWithStreamingResponse",
-    "AsyncCrawlResourceWithStreamingResponse",
-    "ScrapeResource",
-    "AsyncScrapeResource",
-    "ScrapeResourceWithRawResponse",
-    "AsyncScrapeResourceWithRawResponse",
-    "ScrapeResourceWithStreamingResponse",
-    "AsyncScrapeResourceWithStreamingResponse",
-    "MapsResource",
-    "AsyncMapsResource",
-    "MapsResourceWithRawResponse",
-    "AsyncMapsResourceWithRawResponse",
-    "MapsResourceWithStreamingResponse",
-    "AsyncMapsResourceWithStreamingResponse",
-    "SearchesResource",
-    "AsyncSearchesResource",
-    "SearchesResourceWithRawResponse",
-    "AsyncSearchesResourceWithRawResponse",
-    "SearchesResourceWithStreamingResponse",
-    "AsyncSearchesResourceWithStreamingResponse",
+    "WebResource",
+    "AsyncWebResource",
+    "WebResourceWithRawResponse",
+    "AsyncWebResourceWithRawResponse",
+    "WebResourceWithStreamingResponse",
+    "AsyncWebResourceWithStreamingResponse",
+    "FilesResource",
+    "AsyncFilesResource",
+    "FilesResourceWithRawResponse",
+    "AsyncFilesResourceWithRawResponse",
+    "FilesResourceWithStreamingResponse",
+    "AsyncFilesResourceWithStreamingResponse",
+    "UploadResource",
+    "AsyncUploadResource",
+    "UploadResourceWithRawResponse",
+    "AsyncUploadResourceWithRawResponse",
+    "UploadResourceWithStreamingResponse",
+    "AsyncUploadResourceWithStreamingResponse",
+    "VideoGenerationResource",
+    "AsyncVideoGenerationResource",
+    "VideoGenerationResourceWithRawResponse",
+    "AsyncVideoGenerationResourceWithRawResponse",
+    "VideoGenerationResourceWithStreamingResponse",
+    "AsyncVideoGenerationResourceWithStreamingResponse",
+    "QueryResource",
+    "AsyncQueryResource",
+    "QueryResourceWithRawResponse",
+    "AsyncQueryResourceWithRawResponse",
+    "QueryResourceWithStreamingResponse",
+    "AsyncQueryResourceWithStreamingResponse",
 ]

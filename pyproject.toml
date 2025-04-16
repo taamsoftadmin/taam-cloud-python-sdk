@@ -1,11 +1,11 @@
 [project]
 name = "taam_cloud"
-version = "0.1.0-alpha.1"
+version = "1.0.0"
 description = "The official Python library for the taam-cloud API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Taam Cloud", email = "dev-feedback@taam-cloud.com" },
+{ name = "Taam Cloud", email = "dev-feedback@taam.cloud" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -36,7 +36,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/taamsoftadmin/taam-cloud-python-sdk"
 Repository = "https://github.com/taamsoftadmin/taam-cloud-python-sdk"
-
 
 
 [tool.rye]
@@ -87,7 +86,7 @@ typecheck = { chain = [
 "typecheck:mypy" = "mypy ."
 
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme"]
+requires = ["hatchling==1.26.3", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
@@ -148,10 +147,10 @@ exclude = [
 ]
 
 reportImplicitOverride = true
+reportOverlappingOverload = false
 
 reportImportCycles = false
 reportPrivateUsage = false
-
 
 [tool.ruff]
 line-length = 120

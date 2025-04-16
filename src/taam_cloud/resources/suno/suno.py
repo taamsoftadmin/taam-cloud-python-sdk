@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from .music import (
-    MusicResource,
-    AsyncMusicResource,
-    MusicResourceWithRawResponse,
-    AsyncMusicResourceWithRawResponse,
-    MusicResourceWithStreamingResponse,
-    AsyncMusicResourceWithStreamingResponse,
+from .submit import (
+    SubmitResource,
+    AsyncSubmitResource,
+    SubmitResourceWithRawResponse,
+    AsyncSubmitResourceWithRawResponse,
+    SubmitResourceWithStreamingResponse,
+    AsyncSubmitResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -18,8 +18,8 @@ __all__ = ["SunoResource", "AsyncSunoResource"]
 
 class SunoResource(SyncAPIResource):
     @cached_property
-    def music(self) -> MusicResource:
-        return MusicResource(self._client)
+    def submit(self) -> SubmitResource:
+        return SubmitResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SunoResourceWithRawResponse:
@@ -43,8 +43,8 @@ class SunoResource(SyncAPIResource):
 
 class AsyncSunoResource(AsyncAPIResource):
     @cached_property
-    def music(self) -> AsyncMusicResource:
-        return AsyncMusicResource(self._client)
+    def submit(self) -> AsyncSubmitResource:
+        return AsyncSubmitResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSunoResourceWithRawResponse:
@@ -71,8 +71,8 @@ class SunoResourceWithRawResponse:
         self._suno = suno
 
     @cached_property
-    def music(self) -> MusicResourceWithRawResponse:
-        return MusicResourceWithRawResponse(self._suno.music)
+    def submit(self) -> SubmitResourceWithRawResponse:
+        return SubmitResourceWithRawResponse(self._suno.submit)
 
 
 class AsyncSunoResourceWithRawResponse:
@@ -80,8 +80,8 @@ class AsyncSunoResourceWithRawResponse:
         self._suno = suno
 
     @cached_property
-    def music(self) -> AsyncMusicResourceWithRawResponse:
-        return AsyncMusicResourceWithRawResponse(self._suno.music)
+    def submit(self) -> AsyncSubmitResourceWithRawResponse:
+        return AsyncSubmitResourceWithRawResponse(self._suno.submit)
 
 
 class SunoResourceWithStreamingResponse:
@@ -89,8 +89,8 @@ class SunoResourceWithStreamingResponse:
         self._suno = suno
 
     @cached_property
-    def music(self) -> MusicResourceWithStreamingResponse:
-        return MusicResourceWithStreamingResponse(self._suno.music)
+    def submit(self) -> SubmitResourceWithStreamingResponse:
+        return SubmitResourceWithStreamingResponse(self._suno.submit)
 
 
 class AsyncSunoResourceWithStreamingResponse:
@@ -98,5 +98,5 @@ class AsyncSunoResourceWithStreamingResponse:
         self._suno = suno
 
     @cached_property
-    def music(self) -> AsyncMusicResourceWithStreamingResponse:
-        return AsyncMusicResourceWithStreamingResponse(self._suno.music)
+    def submit(self) -> AsyncSubmitResourceWithStreamingResponse:
+        return AsyncSubmitResourceWithStreamingResponse(self._suno.submit)

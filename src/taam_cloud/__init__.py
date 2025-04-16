@@ -4,7 +4,6 @@ from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
 from ._client import (
-    ENVIRONMENTS,
     Client,
     Stream,
     Timeout,
@@ -70,7 +69,6 @@ __all__ = [
     "AsyncStream",
     "TaamCloud",
     "AsyncTaamCloud",
-    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",

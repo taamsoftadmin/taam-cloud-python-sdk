@@ -348,7 +348,7 @@ class TestTaamCloud:
         assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
 
         with pytest.raises(TaamCloudError):
-            with update_env(**{"BEARER_TOKEN": Omit()}):
+            with update_env(**{"TAAM_CLOUD_BEARER_TOKEN": Omit()}):
                 client2 = TaamCloud(base_url=base_url, bearer_token=None, _strict_response_validation=True)
             _ = client2
 
@@ -571,16 +571,6 @@ class TestTaamCloud:
             client = TaamCloud(bearer_token=bearer_token, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(TAAM_CLOUD_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                TaamCloud(bearer_token=bearer_token, _strict_response_validation=True, environment="production")
-
-            client = TaamCloud(
-                base_url=None, bearer_token=bearer_token, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://newapi.taam.cloud")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -758,7 +748,11 @@ class TestTaamCloud:
             self.client.post(
                 "/v1/embeddings",
                 body=cast(
-                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                    object,
+                    maybe_transform(
+                        dict(input=["Generate vector representations of this text"], model="jina-embeddings-v3"),
+                        EmbeddingCreateParams,
+                    ),
                 ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -775,7 +769,11 @@ class TestTaamCloud:
             self.client.post(
                 "/v1/embeddings",
                 body=cast(
-                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                    object,
+                    maybe_transform(
+                        dict(input=["Generate vector representations of this text"], model="jina-embeddings-v3"),
+                        EmbeddingCreateParams,
+                    ),
                 ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -809,7 +807,9 @@ class TestTaamCloud:
 
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
-        response = client.embeddings.with_raw_response.create(input=["string"], model="jina-embeddings-v3")
+        response = client.embeddings.with_raw_response.create(
+            input=["Generate vector representations of this text"], model="jina-embeddings-v3"
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -834,7 +834,9 @@ class TestTaamCloud:
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
         response = client.embeddings.with_raw_response.create(
-            input=["string"], model="jina-embeddings-v3", extra_headers={"x-stainless-retry-count": Omit()}
+            input=["Generate vector representations of this text"],
+            model="jina-embeddings-v3",
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -859,7 +861,9 @@ class TestTaamCloud:
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
         response = client.embeddings.with_raw_response.create(
-            input=["string"], model="jina-embeddings-v3", extra_headers={"x-stainless-retry-count": "42"}
+            input=["Generate vector representations of this text"],
+            model="jina-embeddings-v3",
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1156,7 +1160,7 @@ class TestAsyncTaamCloud:
         assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
 
         with pytest.raises(TaamCloudError):
-            with update_env(**{"BEARER_TOKEN": Omit()}):
+            with update_env(**{"TAAM_CLOUD_BEARER_TOKEN": Omit()}):
                 client2 = AsyncTaamCloud(base_url=base_url, bearer_token=None, _strict_response_validation=True)
             _ = client2
 
@@ -1379,16 +1383,6 @@ class TestAsyncTaamCloud:
             client = AsyncTaamCloud(bearer_token=bearer_token, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(TAAM_CLOUD_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncTaamCloud(bearer_token=bearer_token, _strict_response_validation=True, environment="production")
-
-            client = AsyncTaamCloud(
-                base_url=None, bearer_token=bearer_token, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://newapi.taam.cloud")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -1570,7 +1564,11 @@ class TestAsyncTaamCloud:
             await self.client.post(
                 "/v1/embeddings",
                 body=cast(
-                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                    object,
+                    maybe_transform(
+                        dict(input=["Generate vector representations of this text"], model="jina-embeddings-v3"),
+                        EmbeddingCreateParams,
+                    ),
                 ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1587,7 +1585,11 @@ class TestAsyncTaamCloud:
             await self.client.post(
                 "/v1/embeddings",
                 body=cast(
-                    object, maybe_transform(dict(input=["string"], model="jina-embeddings-v3"), EmbeddingCreateParams)
+                    object,
+                    maybe_transform(
+                        dict(input=["Generate vector representations of this text"], model="jina-embeddings-v3"),
+                        EmbeddingCreateParams,
+                    ),
                 ),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1622,7 +1624,9 @@ class TestAsyncTaamCloud:
 
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
-        response = await client.embeddings.with_raw_response.create(input=["string"], model="jina-embeddings-v3")
+        response = await client.embeddings.with_raw_response.create(
+            input=["Generate vector representations of this text"], model="jina-embeddings-v3"
+        )
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1648,7 +1652,9 @@ class TestAsyncTaamCloud:
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
         response = await client.embeddings.with_raw_response.create(
-            input=["string"], model="jina-embeddings-v3", extra_headers={"x-stainless-retry-count": Omit()}
+            input=["Generate vector representations of this text"],
+            model="jina-embeddings-v3",
+            extra_headers={"x-stainless-retry-count": Omit()},
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1674,7 +1680,9 @@ class TestAsyncTaamCloud:
         respx_mock.post("/v1/embeddings").mock(side_effect=retry_handler)
 
         response = await client.embeddings.with_raw_response.create(
-            input=["string"], model="jina-embeddings-v3", extra_headers={"x-stainless-retry-count": "42"}
+            input=["Generate vector representations of this text"],
+            model="jina-embeddings-v3",
+            extra_headers={"x-stainless-retry-count": "42"},
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1691,7 +1699,7 @@ class TestAsyncTaamCloud:
         import threading
 
         from taam_cloud._utils import asyncify
-        from taam_cloud._base_client import get_platform 
+        from taam_cloud._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()

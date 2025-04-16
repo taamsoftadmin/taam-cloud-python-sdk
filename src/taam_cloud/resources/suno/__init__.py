@@ -8,22 +8,22 @@ from .suno import (
     SunoResourceWithStreamingResponse,
     AsyncSunoResourceWithStreamingResponse,
 )
-from .music import (
-    MusicResource,
-    AsyncMusicResource,
-    MusicResourceWithRawResponse,
-    AsyncMusicResourceWithRawResponse,
-    MusicResourceWithStreamingResponse,
-    AsyncMusicResourceWithStreamingResponse,
+from .submit import (
+    SubmitResource,
+    AsyncSubmitResource,
+    SubmitResourceWithRawResponse,
+    AsyncSubmitResourceWithRawResponse,
+    SubmitResourceWithStreamingResponse,
+    AsyncSubmitResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "MusicResource",
-    "AsyncMusicResource",
-    "MusicResourceWithRawResponse",
-    "AsyncMusicResourceWithRawResponse",
-    "MusicResourceWithStreamingResponse",
-    "AsyncMusicResourceWithStreamingResponse",
+    "SubmitResource",
+    "AsyncSubmitResource",
+    "SubmitResourceWithRawResponse",
+    "AsyncSubmitResourceWithRawResponse",
+    "SubmitResourceWithStreamingResponse",
+    "AsyncSubmitResourceWithStreamingResponse",
     "SunoResource",
     "AsyncSunoResource",
     "SunoResourceWithRawResponse",

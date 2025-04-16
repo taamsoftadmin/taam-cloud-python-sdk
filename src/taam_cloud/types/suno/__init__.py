@@ -2,4 +2,4 @@
 
 from __future__ import annotations
 
-from .music_submit_params import MusicSubmitParams as MusicSubmitParams
+from .submit_generate_music_params import SubmitGenerateMusicParams as SubmitGenerateMusicParams
